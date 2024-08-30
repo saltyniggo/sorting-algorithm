@@ -22,7 +22,7 @@
 - **Worst Case:** O(n log n)
 - **Space Complexity:** O(n)
 
-**Description:** Merge Sort is a stable, comparison-based sorting algorithm. It divides the array into two halves, sorts them recursively, and then merges the sorted halves. The merge operation takes linear time, and the overall time complexity is consistently O(n log n). It is particularly useful for sorting linked lists and large datasets stored on external storage.
+**Description:** Merge Sort is a stable, comparison-based sorting algorithm. The algorithm divides the data structure recursively until the subsequences contain only one element. At this point, the subsequences get merged and ordered sequentially. To do so, the algorithm progressively builds the sorted sublist by adding each time the minimum element of the next two unsorted subsequences until there is only one sublist remaining. This will be the sorted data structure. The merge operation takes linear time, and the overall time complexity is consistently O(n log n). It is particularly useful for sorting linked lists and large datasets stored on external storage.
 
 It can be implemented iteratively or recursively, using the Top-Down and Bottom-Up algorithms respectively.
 
