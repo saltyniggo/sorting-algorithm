@@ -41,6 +41,8 @@ It can be implemented iteratively or recursively, using the Top-Down and Bottom-
 
 **Description:** Heap Sort is a comparison-based sorting technique based on a binary heap data structure. The algorithm first builds a max heap from the input data and then repeatedly extracts the maximum element from the heap, placing it at the end of the array. This process is repeated until all elements are sorted.
 
+arrary --> heapify (build binary tree) --> max heap -->remove max --> repeat
+
 ## Quadratic Algorithms
 
 ### Bubble Sort
