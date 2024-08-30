@@ -150,12 +150,18 @@ It can be implemented iteratively or recursively, using the Top-Down and Bottom-
 
 **Complexity**
 
-- **Average Complexity:** O(nk)
-- **Best Case:** O(nk)
-- **Worst Case:** O(nk)
-- **Space Complexity:** O(n + k)
+- **Average Complexity:** O(d × (n + b))
+- **Best Case:** O(d × (n + b))
+- **Worst Case:** O(d × (n + b))
+- **Space Complexity:** O(n + 2^d)
 
-**Description:** Radix Sort is a non-comparative integer sorting algorithm that sorts numbers by processing individual digits. It works by sorting the array multiple times, each time based on a different digit or group of digits. It is efficient for sorting large numbers of integers, particularly when the range of the integers is known.
+**Description:** Radix Sort is a sorting algorithm that doesn't use comparisons. Its complexity depends, in addition to the number of elements, by the values b and d, representing the radix of the numbers and the maximum number of digits of the elements respectively.
+
+Radix Sort works by splitting the elements into buckets, according to their radix, starting from the least significant digit (LSD) or from the most significant digit (MSD) of the number. If the number has more than one significant digit, this process is repeated to account all the digits of the number.
+
+It's a particular sorting algorithm really different from the others as it is not based on comparisons, but on the digits of the number instead, so it's only applicable on whole numbers or strings.
+
+It can be faster than other logarithmic sorting algorithms on big data structures as it can even perform in linear time in special cases, but it's not widely used due to its limitations.
 
 ### Shell Sort
 
@@ -166,7 +172,9 @@ It can be implemented iteratively or recursively, using the Top-Down and Bottom-
 - **Worst Case:** O(n²)
 - **Space Complexity:** O(1)
 
-**Description:** Shell Sort is an in-place comparison sort that generalizes insertion sort by allowing the exchange of items that are far apart. The gap sequence is crucial for its performance, and various sequences (e.g., Knuth's sequence) provide different time complexities. It's more efficient than quadratic sorts, especially for medium-sized datasets.
+**Description:** Shell Sort is one of the oldest sorting algorithms and it's an extension of the Insertion Sort. This algorithm is fast and easy to implement, but it's hard to measure its performances.
+
+Unlike Insertion Sort, Shell Sort starts by comparing the elements distant from each other by a certain gap that gets progressively decreased. By starting with the most distant elements, it can optimize performances as it's not limited by just comparing two adjacent elements.
 
 ---
 
