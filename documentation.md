@@ -67,6 +67,8 @@ arrary --> heapify (build binary tree) --> max heap -->remove max --> repeat
 
 **Description:** Selection Sort is another simple sorting algorithm that divides the input list into two parts: a sorted subarray and an unsorted subarray. The algorithm repeatedly selects the smallest (or largest, depending on sorting order) element from the unsorted subarray and moves it to the end of the sorted subarray. It has poor performance on large lists and is generally outperformed by more advanced algorithms.
 
+The algorithm divides the data structure in two sublists: a sorted one, and one still to sort. Initially, the sorted sublist is made up of just one element and it gets progressively filled. For every iteration, the algorithm picks an element on the unsorted sublist and inserts it at the right place in the sorted sublist.
+
 ### Insertion Sort
 
 **Complexity**
