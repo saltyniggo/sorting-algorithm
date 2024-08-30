@@ -12,6 +12,7 @@
 **Description:** Quick Sort is a divide-and-conquer algorithm that selects a pivot element and partitions the array into two halves, one with elements less than the pivot and one with elements greater than the pivot. This process is recursively applied to the subarrays. Its average-case performance is very good, but in the worst case, its performance degrades to quadratic time.
 
 **smaller elements - pivot element - bigger elements**
+
 **left partition - pivot - right partition**
 
 ### Merge Sort
