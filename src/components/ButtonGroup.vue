@@ -1,12 +1,27 @@
 <template>
   <div class="button-group">
-    <button id="randomize-array" @click="$emit('pressedRandomize')">
-      Randomize Array
-    </button>
-    <button id="start-sorting" @click="$emit('pressedStart')">
-      Start Sorting
-    </button>
+    <button @click="$emit('pressedRandomize')">Randomize Array</button>
+    <button @click="$emit('pressedStart')">Start Sorting</button>
   </div>
 </template>
 
-<script setup></script>
+<style scoped>
+.button-group {
+  margin: 20px 0;
+}
+
+button {
+  background-color: #09599c;
+  color: white;
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+</style>

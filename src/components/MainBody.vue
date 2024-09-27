@@ -1,9 +1,9 @@
 <template>
   <div>
-    <algorithm-selection @algorithmSelected="selectedAlgorithm = $event" />
+    <algorithm-selection @algorithmSelected="handleAlgorithmSelection" />
     <button-group
-      @pressedRandomize="shuffleArray()"
-      @pressedStart="startSorting()"
+      @pressedRandomize="shuffleArray"
+      @pressedStart="startSorting"
     />
     <array-container
       :startArray="startArray"
@@ -14,18 +14,21 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import AlgorithmSelection from "./AlgorithmSelection.vue";
 import ButtonGroup from "./ButtonGroup.vue";
 import ArrayContainer from "./ArrayContainer.vue";
 import { quickSort, radixSort, shellSort } from "../algorithms/algorithms.js";
 
-const startArray = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-const currentArray = ref();
+const startArray = ref([]);
+const currentArray = ref([]);
 const sortingArray = ref([]);
+const selectedAlgorithm = ref("quick");
 
-const selectedAlgorithm = ref("");
+function initializeArray(size = 10) {
+  startArray.value = Array.from({ length: size }, (_, i) => i + 1);
+  currentArray.value = [...startArray.value];
+}
 
 function shuffleArray() {
   for (let i = startArray.value.length - 1; i > 0; i--) {
@@ -35,28 +38,35 @@ function shuffleArray() {
       startArray.value[i],
     ];
   }
-  currentArray.value = startArray.value;
+  currentArray.value = [...startArray.value];
 }
 
-function startSorting() {
-  console.log(selectedAlgorithm.value);
+function handleAlgorithmSelection(algorithm) {
+  selectedAlgorithm.value = algorithm;
+}
+
+async function startSorting() {
+  sortingArray.value = [...currentArray.value];
   switch (selectedAlgorithm.value) {
     case "quick":
-      currentArray.value = quickSort(currentArray.value);
+      currentArray.value = await quickSort(currentArray.value);
       break;
     case "radix":
-      currentArray.value = radixSort(currentArray.value);
+      currentArray.value = await radixSort(currentArray.value);
       break;
     case "shell":
-      currentArray.value = shellSort(currentArray.value);
+      currentArray.value = await shellSort(currentArray.value);
       break;
     default:
-      // Handle default case here
-      break;
+      console.warn("Unknown sorting algorithm selected");
   }
 }
 
 onMounted(() => {
-  currentArray.value = [...startArray.value];
+  initializeArray();
 });
 </script>
+
+<style scoped>
+/* You can define some global styles here */
+</style>

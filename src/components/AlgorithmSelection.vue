@@ -11,3 +11,16 @@
     </select>
   </div>
 </template>
+
+<style scoped>
+.algorithm-selection {
+  margin-bottom: 20px;
+}
+
+select {
+  margin-left: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+</style>
