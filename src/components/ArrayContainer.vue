@@ -36,15 +36,13 @@
 <script setup>
 import { defineProps, ref } from "vue";
 
-// Define props
 const props = defineProps({
   startArray: Array,
   sortingArray: Array,
   currentArray: Array,
 });
 
-// Control visibility of the starting array
-const showStartArray = ref(true);
+const showStartArray = ref(false);
 </script>
 
 <style scoped>

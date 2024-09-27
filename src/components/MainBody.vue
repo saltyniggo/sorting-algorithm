@@ -11,7 +11,6 @@
       :currentArray="currentArray"
     />
 
-    <!-- Algorithm Description Section -->
     <div class="algorithm-description">
       <h3>{{ algorithmDetails[selectedAlgorithm].name }} Algorithm</h3>
       <p>{{ algorithmDetails[selectedAlgorithm].description }}</p>
@@ -60,7 +59,6 @@ const sortingArray = ref([]);
 const selectedAlgorithm = ref("quick");
 const delayTime = ref(750);
 
-// Descriptions for each algorithm
 const algorithmDetails = {
   quick: {
     name: "Quick Sort",
