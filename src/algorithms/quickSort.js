@@ -1,19 +1,29 @@
-export function quickSort(arr) {
-    if (arr.length <= 1) {
-      return arr;
-    }
-  
-    let pivot = arr[0];
-    let leftArr = [];
-    let rightArr = [];
-  
-    for (let i = 1; i < arr.length; i++) {
-      if (arr[i] < pivot) {
-        leftArr.push(arr[i]);
-      } else {
-        rightArr.push(arr[i]);
-      }
-    }
-  
-    return [...quickSort(leftArr), pivot, ...quickSort(rightArr)];
+import { delay } from "../composables/delay";
+
+export async function quickSort(arr, updateArray) {
+  if (arr.length <= 1) {
+    return arr;
   }
+
+  let pivot = arr[0];
+  let leftArr = [];
+  let rightArr = [];
+
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] < pivot) {
+      leftArr.push(arr[i]);
+    } else {
+      rightArr.push(arr[i]);
+    }
+  }
+
+  const sortedLeft = await quickSort(leftArr, updateArray);
+  const sortedRight = await quickSort(rightArr, updateArray);
+
+  const sortedArray = [...sortedLeft, pivot, ...sortedRight];
+
+  updateArray(sortedArray);
+  await delay(750);
+
+  return sortedArray;
+}

@@ -8,6 +8,7 @@
       <option value="quick">Quick Sort</option>
       <option value="radix">Radix Sort</option>
       <option value="shell">Shell Sort</option>
+      <option value="bubble">Bubble Sort</option>
     </select>
   </div>
 </template>

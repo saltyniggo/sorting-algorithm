@@ -1,17 +1,17 @@
-export function bubbleSort(arr) {
-    let length = arr.length;
-    let swapped;
+import { delay } from "../composables/delay";
 
-    do {
-        swapped = false;
-        for (let k = 0; k < length - 1; k++) {
-            if (arr[k] > arr[k + 1]) {
-                [arr[k], arr[k + 1]] = [arr[k + 1], arr[k]];
-                swapped = true;
-            }
-        }
-        length--; // Reduce the range of the next iteration
-    } while (swapped);
-
-    return arr;
+export async function bubbleSort(array, updateArray) {
+  let length = array.length;
+  let arr = [...array];
+  for (let i = 0; i < length; i++) {
+    for (let j = 0; j < length - i - 1; j++) {
+      if (arr[j] > arr[j + 1]) {
+        // Swap
+        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+        updateArray([...arr]);
+        await delay(750);
+      }
+    }
+  }
+  return arr;
 }

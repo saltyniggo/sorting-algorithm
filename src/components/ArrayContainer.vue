@@ -38,7 +38,7 @@ const props = defineProps({
 
 .array-bar {
   width: 30px;
-  background-color: #09599c;
+  background-color: #4caf50;
   text-align: center;
   margin: 0 5px;
   transition: height 0.3s ease-in-out;

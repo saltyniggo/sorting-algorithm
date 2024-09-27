@@ -18,7 +18,12 @@ import { ref, onMounted } from "vue";
 import AlgorithmSelection from "./AlgorithmSelection.vue";
 import ButtonGroup from "./ButtonGroup.vue";
 import ArrayContainer from "./ArrayContainer.vue";
-import { quickSort, radixSort, shellSort } from "../algorithms/algorithms.js";
+import {
+  bubbleSort,
+  quickSort,
+  radixSort,
+  shellSort,
+} from "../algorithms/algorithms.js";
 
 const startArray = ref([]);
 const currentArray = ref([]);
@@ -46,16 +51,24 @@ function handleAlgorithmSelection(algorithm) {
 }
 
 async function startSorting() {
+  const updateArray = (newArray) => {
+    sortingArray.value = [...newArray];
+  };
+
   sortingArray.value = [...currentArray.value];
+
   switch (selectedAlgorithm.value) {
+    case "bubble":
+      currentArray.value = await bubbleSort(currentArray.value, updateArray);
+      break;
     case "quick":
-      currentArray.value = await quickSort(currentArray.value);
+      currentArray.value = await quickSort(currentArray.value, updateArray);
       break;
     case "radix":
-      currentArray.value = await radixSort(currentArray.value);
+      currentArray.value = await radixSort(currentArray.value, updateArray);
       break;
     case "shell":
-      currentArray.value = await shellSort(currentArray.value);
+      currentArray.value = await shellSort(currentArray.value, updateArray);
       break;
     default:
       console.warn("Unknown sorting algorithm selected");
