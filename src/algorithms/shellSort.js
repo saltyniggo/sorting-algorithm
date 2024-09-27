@@ -1,6 +1,6 @@
 import { delay } from "../composables/delay";
 
-export async function shellSort(arr, updateArray) {
+export async function shellSort(arr, updateArray, time) {
   let n = arr.length;
   let sortedArr = [...arr];
 
@@ -12,12 +12,11 @@ export async function shellSort(arr, updateArray) {
       for (j = i; j >= gap && sortedArr[j - gap] > temp; j -= gap) {
         sortedArr[j] = sortedArr[j - gap];
         updateArray([...sortedArr]);
-        await delay(750);
+        await delay(time);
       }
       sortedArr[j] = temp;
 
       updateArray([...sortedArr]);
-      await delay(750);
     }
   }
 

@@ -1,38 +1,40 @@
-export function mergeSortAlg(arr) {
+import { delay } from "../composables/delay";
 
-    // this function is used to split the array into two halves
-    function mergeSort(array) {
-        const half = Math.floor(array.length / 2);
+export async function mergeSort(arr, updateArray, time) {
+  const sortedArray = await mergeSortAlg(arr, updateArray, time);
+  updateArray(sortedArray);
+  return sortedArray;
+}
 
-        // if the length of the array is less than 2 return the array
-        if (array.length < 2) {
-            return array;
-        }
+async function mergeSortAlg(array, updateArray, time) {
+  const half = Math.floor(array.length / 2);
 
-        // split the array into two halves
-        const left = array.splice(0, half); // slice if orignal array should not be modified
-        const right = array.splice(half); // slice if orignal array should not be modified
+  if (array.length < 2) {
+    return array;
+  }
 
-        // recursively merge the two halves and return the sorted array
-        return merge(mergeSort(left), mergeSort(right));
+  const left = array.slice(0, half);
+  const right = array.slice(half);
+
+  const sortedLeft = await mergeSortAlg(left, updateArray, time);
+  const sortedRight = await mergeSortAlg(right, updateArray, time);
+
+  return merge(sortedLeft, sortedRight, updateArray, time);
+}
+
+async function merge(left, right, updateArray, time) {
+  let arr = [];
+
+  while (left.length && right.length) {
+    if (left[0] < right[0]) {
+      arr.push(left.shift());
+    } else {
+      arr.push(right.shift());
     }
 
-    //This function takes two sorted arrays (left and right half) and merges them into a single sorted array.
-    //It compares the first element of each array and pushes the smaller element into the result array (arr).
-    //As soon as one of the arrays is empty, the remaining elements of the other array are appended to the result.
-    function merge(left, right) {
-        let arr = [];
+    await delay(time);
+    updateArray([...arr, ...left, ...right]);
+  }
 
-        while (left.length && right.length) {
-            if (left[0] < right[0]) {
-                arr.push(left.shift());
-            } else {
-                arr.push(right.shift());
-            }
-        }
-
-        return [...arr, ...left, ...right];
-    }
-
-    return mergeSort(arr);
+  return [...arr, ...left, ...right];
 }

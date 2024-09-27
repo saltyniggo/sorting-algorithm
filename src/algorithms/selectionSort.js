@@ -1,18 +1,24 @@
-export function selectionSort(arr) {
+import { delay } from "../composables/delay";
 
+export async function selectionSort(arr, updateArray, time) {
+  for (let i = 0; i < arr.length; i++) {
+    let min = i;
 
-    for (var i = 0; i < arr.length; i++) { // loop through the array
-        let min = i; // store the index of the current element
-        for (var j = i + 1; j < arr.length; j++) { // loop through the array starting from the next element
-            if (arr[min] > arr[j]) { // if the current element is greater than the next element
-                min = j; // update the index of the current element
-            }
-        }
-        if (i != min) { // if the current element is not the minimum element
-            [arr[ i ],arr[min]]= [arr[min],arr[ i ]]; // swap the current element with the minimum element
-        } 
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[min] > arr[j]) {
+        min = j;
+      }
     }
-    return arr
+
+    if (i !== min) {
+      [arr[i], arr[min]] = [arr[min], arr[i]];
+
+      updateArray([...arr]);
+      await delay(time);
+    }
+  }
+
+  return arr;
 }
 
 // Example

@@ -1,40 +1,49 @@
-export function insertionSort(bucket) {
-    for (let i = 1; i < bucket.length; ++i) {
-        let key = bucket[i];
-        let j = i - 1;
-        while (j >= 0 && bucket[j] > key) {
-            bucket[j + 1] = bucket[j];
-            j--;
-        }
-        bucket[j + 1] = key;
+import { delay } from "../composables/delay";
+
+export async function bucketSort(arr, updateArray, time) {
+  let n = arr.length;
+  if (n <= 0) return arr;
+
+  let max = Math.max(...arr);
+
+  let buckets = Array.from({ length: n }, () => []);
+
+  for (let i = 0; i < n; i++) {
+    let bi = Math.floor((arr[i] / max) * (n - 1));
+    buckets[bi].push(arr[i]);
+
+    updateArray([...arr]);
+    await delay(time);
+  }
+
+  for (let i = 0; i < n; i++) {
+    insertionSort(buckets[i]);
+
+    updateArray([...arr]);
+    await delay(time);
+  }
+
+  let index = 0;
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < buckets[i].length; j++) {
+      arr[index++] = buckets[i][j];
+
+      updateArray([...arr]);
+      await delay(time);
     }
+  }
+
+  return arr;
 }
 
-function bucketSort(arr) {
-    let n = arr.length;
-    let buckets = Array.from({length: n}, () => []);
-
-    // Put array elements in different buckets
-    for (let i = 0; i < n; i++) {
-        let bi = Math.floor(n * arr[i]);
-        buckets[bi].push(arr[i]);
+function insertionSort(bucket) {
+  for (let i = 1; i < bucket.length; ++i) {
+    let key = bucket[i];
+    let j = i - 1;
+    while (j >= 0 && bucket[j] > key) {
+      bucket[j + 1] = bucket[j];
+      j--;
     }
-
-    // Sort individual buckets using insertion sort
-    for (let i = 0; i < n; i++) {
-        insertionSort(buckets[i]);
-    }
-
-    // Concatenate all buckets into arr[]
-    let index = 0;
-    for (let i = 0; i < n; i++) {
-        for (let j = 0; j < buckets[i].length; j++) {
-            arr[index++] = buckets[i][j];
-        }
-    }
+    bucket[j + 1] = key;
+  }
 }
-
-let arr = [0.897, 0.565, 0.656, 0.1234, 0.665, 0.3434];
-bucketSort(arr);
-console.log("Sorted array is:");
-console.log(arr.join(" "));

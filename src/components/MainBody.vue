@@ -20,8 +20,13 @@ import ButtonGroup from "./ButtonGroup.vue";
 import ArrayContainer from "./ArrayContainer.vue";
 import {
   bubbleSort,
+  bucketSort,
+  heapSort,
+  insertionSort,
+  mergeSort,
   quickSort,
   radixSort,
+  selectionSort,
   shellSort,
 } from "../algorithms/algorithms.js";
 
@@ -29,6 +34,7 @@ const startArray = ref([]);
 const currentArray = ref([]);
 const sortingArray = ref([]);
 const selectedAlgorithm = ref("quick");
+const delayTime = ref(750);
 
 function initializeArray(size = 10) {
   startArray.value = Array.from({ length: size }, (_, i) => i + 1);
@@ -59,16 +65,68 @@ async function startSorting() {
 
   switch (selectedAlgorithm.value) {
     case "bubble":
-      currentArray.value = await bubbleSort(currentArray.value, updateArray);
+      currentArray.value = await bubbleSort(
+        currentArray.value,
+        updateArray,
+        delayTime.value
+      );
       break;
     case "quick":
-      currentArray.value = await quickSort(currentArray.value, updateArray);
+      currentArray.value = await quickSort(
+        currentArray.value,
+        updateArray,
+        delayTime.value
+      );
       break;
     case "radix":
-      currentArray.value = await radixSort(currentArray.value, updateArray);
+      currentArray.value = await radixSort(
+        currentArray.value,
+        updateArray,
+        delayTime.value
+      );
       break;
     case "shell":
-      currentArray.value = await shellSort(currentArray.value, updateArray);
+      currentArray.value = await shellSort(
+        currentArray.value,
+        updateArray,
+        delayTime.value
+      );
+      break;
+    case "selection":
+      currentArray.value = await selectionSort(
+        currentArray.value,
+        updateArray,
+        delayTime.value
+      );
+      break;
+
+    case "heap":
+      currentArray.value = await heapSort(
+        currentArray.value,
+        updateArray,
+        delayTime.value
+      );
+      break;
+    case "insertion":
+      currentArray.value = await insertionSort(
+        currentArray.value,
+        updateArray,
+        delayTime.value
+      );
+      break;
+    case "merge":
+      currentArray.value = await mergeSort(
+        currentArray.value,
+        updateArray,
+        delayTime.value
+      );
+      break;
+    case "bucket":
+      currentArray.value = await bucketSort(
+        currentArray.value,
+        updateArray,
+        delayTime.value
+      );
       break;
     default:
       console.warn("Unknown sorting algorithm selected");

@@ -1,6 +1,6 @@
 import { delay } from "../composables/delay";
 
-export async function bubbleSort(array, updateArray) {
+export async function bubbleSort(array, updateArray, time) {
   let length = array.length;
   let arr = [...array];
   for (let i = 0; i < length; i++) {
@@ -9,7 +9,7 @@ export async function bubbleSort(array, updateArray) {
         // Swap
         [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
         updateArray([...arr]);
-        await delay(750);
+        await delay(time);
       }
     }
   }

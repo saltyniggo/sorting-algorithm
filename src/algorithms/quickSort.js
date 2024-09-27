@@ -1,6 +1,6 @@
 import { delay } from "../composables/delay";
 
-export async function quickSort(arr, updateArray) {
+export async function quickSort(arr, updateArray, time) {
   if (arr.length <= 1) {
     return arr;
   }
@@ -23,7 +23,7 @@ export async function quickSort(arr, updateArray) {
   const sortedArray = [...sortedLeft, pivot, ...sortedRight];
 
   updateArray(sortedArray);
-  await delay(750);
+  await delay(time);
 
   return sortedArray;
 }

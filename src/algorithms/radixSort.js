@@ -1,6 +1,6 @@
 import { delay } from "../composables/delay";
 
-export async function radixSort(arr, updateArray) {
+export async function radixSort(arr, updateArray, time) {
   const max = getMax(arr);
 
   for (let i = 0; i < max; i++) {
@@ -11,7 +11,7 @@ export async function radixSort(arr, updateArray) {
     arr = [].concat(...buckets);
 
     updateArray([...arr]);
-    await delay(750);
+    await delay(time);
   }
 
   return arr;
